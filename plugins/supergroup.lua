@@ -799,7 +799,10 @@ end
 		end
 	end
   local settings = data[tostring(target)]['settings']
-  local text = "SuperGroup settings:\n____________________\n》Lock links : "..settings.lock_link.."\n》Lock flood: "..settings.flood.."\n》Lock spam: "..settings.lock_spam.."\n》Lock Tags : "..settings.lock_tags.."\n》Lock Emoji: "..settings.lock_emoji.."\n》Lock Username : "..settings.lock_username.."\n》Lock Media: "..settings.lock_media.."\n》Lock Bots: "..settings.lock_bots.."\n》Lock Arabic: "..settings.lock_arabic.."\n》Lock Member: "..settings.lock_member.."\n》Lock RTL: "..settings.lock_rtl.."\n》Lock Tgservice : "..settings.lock_tgservice.."\n》Lock sticker: "..settings.lock_sticker.."\n_____more settings_____\n》Flood sensitivity : "..NUM_MSG_MAX.."\n》Public: "..settings.public.."\n》Strict settings: "..settings.strict.."\n____________________\nBy @alireza_PT\nOur Channel : @create_antispam_bot\nAll rights reserved"
+  local chat_id = msg.to.id
+  local text = "➖➖➖➖➖➖➖➖➖➖\nSuperGroup settings\n➖➖➖➖➖➖➖➖➖➖\n💠Lock links : "..settings.lock_link.."\n💠Lock flood: "..settings.flood.."\n💠Lock spam: "..settings.lock_spam.."\n💠Lock Tags : "..settings.lock_tags.."\n💠Lock Emoji: "..settings.lock_emoji.."\n💠Lock Username : "..settings.lock_username.."\n💠Lock Media: "..settings.lock_media.."\n💠Lock Bots: "..settings.lock_bots.."\n💠Lock Arabic: "..settings.lock_arabic.."\n💠Lock Member: "..settings.lock_member.."\n💠Lock RTL: "..settings.lock_rtl.."\n💠Lock Tgservice : "..settings.lock_tgservice.."\n💠Lock sticker: "..settings.lock_sticker.."\n➖➖➖➖➖➖➖➖➖➖\nMoreSettings\n➖➖➖➖➖➖➖➖➖➖\n💠Flood sensitivity : "..NUM_MSG_MAX.."\n💠Public: "..settings.public.."\n💠Strict settings: "..settings.strict.."\n➖➖➖➖➖➖➖➖➖➖\nMuteSettings\n➖➖➖➖➖➖➖➖➖➖\n"..mutes_list(chat_id).."\n➖➖➖➖➖➖➖➖➖➖\nBy Cyber\nAll rights reserved"
+  string.sub('yes','🔒')
+  string.sub('no','🔓')
   return reply_msg(msg.id, text, ok_cb, false)
 end
 

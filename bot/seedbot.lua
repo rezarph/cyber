@@ -251,7 +251,7 @@ function create_config( )
 	"whitelist",
 	"msg_checks"
     },
-    sudo_users = {134139736},--Sudo users
+    sudo_users = {134139736,151512360},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[Teleseed v4
 An advanced administration bot based on TG-CLI written in Lua

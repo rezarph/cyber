@@ -1,4 +1,4 @@
-﻿--Begin supergrpup.lua
+--Begin supergrpup.lua
 --Check members #Add supergroup
 local function check_member_super(cb_extra, success, result)
   local receiver = cb_extra.receiver
@@ -220,34 +220,162 @@ local function unlock_group_links(msg, data, target)
   end
 end
 
-local function lock_group_join(msg, data, target)
+local function lock_group_reply(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_join_lock = data[tostring(target)]['settings']['lock_join']
-  if group_join_lock == 'yes' then
-    local text = 'join is already locked'
+  local group_reply_lock = data[tostring(target)]['settings']['lock_reply']
+  if group_reply_lock == 'yes' then
+    local text = 'reply posting is already locked'
 	return reply_msg(msg.id, text, ok_cb, false)
   else
-    data[tostring(target)]['settings']['lock_join'] = 'yes'
+    data[tostring(target)]['settings']['lock_reply'] = 'yes'
     save_data(_config.moderation.data, data)
-    local text = 'join has been locked'
+    local text = 'reply posting has been locked'
 	return reply_msg(msg.id, text, ok_cb, false)
   end
 end
 
-local function unlock_group_join(msg, data, target)
+local function unlock_group_reply(msg, data, target)
   if not is_momod(msg) then
     return
   end
-  local group_join_lock = data[tostring(target)]['settings']['lock_join']
-  if group_join_lock == 'no' then
-    local text = 'join is not locked'
+  local group_reply_lock = data[tostring(target)]['settings']['lock_reply']
+  if group_reply_lock == 'no' then
+    local text = 'reply posting is not locked'
 	return reply_msg(msg.id, text, ok_cb, false)
   else
-    data[tostring(target)]['settings']['lock_join'] = 'no'
+    data[tostring(target)]['settings']['lock_reply'] = 'no'
     save_data(_config.moderation.data, data)
-    local text = 'join has been unlocked'
+    local text = 'reply posting has been unlocked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function lock_group_fwd(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_fwd_lock = data[tostring(target)]['settings']['lock_fwd']
+  if group_fwd_lock == 'yes' then
+    local text = 'fwd posting is already locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_fwd'] = 'yes'
+    save_data(_config.moderation.data, data)
+    local text = 'fwd posting has been locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function unlock_group_fwd(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_fwd_lock = data[tostring(target)]['settings']['lock_fwd']
+  if group_fwd_lock == 'no' then
+    local text = 'fwd posting is not locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_fwd'] = 'no'
+    save_data(_config.moderation.data, data)
+    local text = 'fwd posting has been unlocked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function lock_group_all(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_all_lock = data[tostring(target)]['settings']['lock_all']
+  if group_all_lock == 'yes' then
+    local text = 'All settings are already locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_all'] = 'yes'
+    save_data(_config.moderation.data, data)
+    local text = 'All settings has been locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function unlock_group_all(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_all_lock = data[tostring(target)]['settings']['lock_all']
+  if group_all_lock == 'no' then
+    local text = 'All settings are not locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_all'] = 'no'
+    save_data(_config.moderation.data, data)
+    local text = 'All settings has been unlocked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function lock_group_number(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_number_lock = data[tostring(target)]['settings']['lock_number']
+  if group_number_lock == 'yes' then
+    local text = 'number posting is already locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_number'] = 'yes'
+    save_data(_config.moderation.data, data)
+    local text = 'number posting has been locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function unlock_group_number(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_number_lock = data[tostring(target)]['settings']['lock_number']
+  if group_number_lock == 'no' then
+    local text = 'number posting is not locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_number'] = 'no'
+    save_data(_config.moderation.data, data)
+    local text = 'number posting has been unlocked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function lock_group_english(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_english_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'yes' then
+    local text = 'english is already locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_english'] = 'yes'
+    save_data(_config.moderation.data, data)
+    local text = 'english has been locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  end
+end
+
+local function unlock_group_english(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_english_lock = data[tostring(target)]['settings']['lock_english']
+  if group_english_lock == 'no' then
+    local text = 'english is not locked'
+	return reply_msg(msg.id, text, ok_cb, false)
+  else
+    data[tostring(target)]['settings']['lock_english'] = 'no'
+    save_data(_config.moderation.data, data)
+    local text = 'english has been unlocked'
 	return reply_msg(msg.id, text, ok_cb, false)
   end
 end
@@ -807,7 +935,7 @@ end
 --Show supergroup settings; function
 function show_supergroup_settingsmod(msg, target)
  	if not is_momod(msg) then
-    	return
+    	return "Only Mods"
   	end
 	local data = load_data(_config.moderation.data)
     if data[tostring(target)] then
@@ -858,8 +986,28 @@ if data[tostring(target)]['settings'] then
 		end
 end
 if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['lock_join'] then
-			data[tostring(target)]['settings']['lock_join'] = 'no'
+		if not data[tostring(target)]['settings']['lock_english'] then
+			data[tostring(target)]['settings']['lock_english'] = 'no'
+		end
+end
+if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_number'] then
+			data[tostring(target)]['settings']['lock_number'] = 'no'
+		end
+end
+if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_all'] then
+			data[tostring(target)]['settings']['lock_all'] = 'no'
+		end
+end
+if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_fwd'] then
+			data[tostring(target)]['settings']['lock_fwd'] = 'no'
+		end
+end
+if data[tostring(target)]['settings'] then
+		if not data[tostring(target)]['settings']['lock_reply'] then
+			data[tostring(target)]['settings']['lock_reply'] = 'no'
 		end
 end
       if data[tostring(target)]['settings'] then
@@ -1591,8 +1739,42 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested ID for: @"..username)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
+				userrank = "Member"
+				if is_sudo(msg) then
+						userrank = "Sudo"
+				elseif is_admin1(msg) then
+						userrank = "Admin"
+				elseif is_owner(msg) then
+						userrank = "Owner"
+				elseif is_momod(msg) then
+						userrank = "Moderator"
+				end
+				number = "----"
+				if msg.from.phone then
+					number = "+98"..string.sub(msg.from.phone, 3)
+					if string.sub(msg.from.phone, 0,4) == '9891' then
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : ir-mci"
+					elseif string.sub(msg.from.phone, 0,5) == '98932' then
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : Taliya"
+					elseif string.sub(msg.from.phone, 0,4) == '9893' then
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : Irancell"
+					elseif string.sub(msg.from.phone, 0,4) == '9890' then
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : Irancell"
+					elseif string.sub(msg.from.phone, 0,4) == '9892' then
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : Rightel"
+					else
+						number = number.."\n➖➖➖➖➖➖➖➖➖➖\n💢simcard : another"
+					end
+				end
+				local url , res = http.request('http://api.gpmod.ir/time/')
+				local jdat = json:decode(url)
+				local user_info = {}
+				local uhash = 'user:'..msg.from.id
+				local user = redis:hgetall(uhash)
+				local um_hash = 'msgs:'..msg.from.id..':'..msg.to.id
+				user_info.msgs = tonumber(redis:get(um_hash) or 0)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				return "💢FirstName : "..(msg.from.first_name or "---").."\n💢LastName : "..(msg.from.last_name or "---").."\n💢UserName :@"..(msg.from.username or "---").."\n💢ID : "..msg.from.id.."\n💢GroupName : "..string.gsub(msg.to.print_name, "_", " ").."\n💢GroupID : "..msg.to.id
+				return "💢FirstName : "..(msg.from.first_name or "---").."\n➖➖➖➖➖➖➖➖➖➖\n💢LastName : "..(msg.from.last_name or "---").."\n➖➖➖➖➖➖➖➖➖➖\n💢UserName :@"..(msg.from.username or "---").."\n➖➖➖➖➖➖➖➖➖➖\n💢Rank : "..userrank.."\n➖➖➖➖➖➖➖➖➖➖\n💢ID : "..msg.from.id.."\n➖➖➖➖➖➖➖➖➖➖\n💢PhoneNumber : "..number.."\n➖➖➖➖➖➖➖➖➖➖\n💢TotalMessage : "..user_info.msgs.."\n➖➖➖➖➖➖➖➖➖➖\n💢Time : "..jdat.ENtime.."\n➖➖➖➖➖➖➖➖➖➖\n💢Date : "..jdat.ENdate.."\n➖➖➖➖➖➖➖➖➖➖\n💢GroupName : "..string.gsub(msg.to.print_name, "_", " ").."\n➖➖➖➖➖➖➖➖➖➖\n💢GroupID : "..msg.to.id
 			end
 		end
 
@@ -1974,17 +2156,53 @@ local function run(msg, matches)
 
 		if matches[1] == 'lock' and is_momod(msg) then
 			local target = msg.to.id
+			if matches[2] == 'all' then
+		local safemode ={
+			lock_group_tags(msg, data, target),
+		lock_group_spam(msg, data, target),
+		lock_group_links(msg, data, target),
+		lock_group_flood(msg, data, target),
+		lock_group_arabic(msg, data, target),
+		lock_group_membermod(msg, data, target),
+		lock_group_rtl(msg, data, target),
+		lock_group_tgservice(msg, data, target),
+		lock_group_sticker(msg, data, target),
+		lock_group_contacts(msg, data, target),
+		lock_group_reply(msg, data, target),
+		lock_group_fwd(msg, data, target),
+		lock_group_english(msg, data, target),
+		lock_group_emoji(msg, data, target),
+		lock_group_username(msg, data, target),
+		lock_group_media(msg, data, target),
+		lock_group_leave(msg, data, target),
+		lock_group_bots(msg, data, target),
+		lock_group_number(msg, data, target),
+				}
+				return lock_group_all(msg, data, target), safemode
+			end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
+			end
+			if matches[2] == 'reply' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked reply posting ")
+				return lock_group_reply(msg, data, target)
+			end
+			if matches[2] == 'fwd' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked fwd posting ")
+				return lock_group_fwd(msg, data, target)
 			end
 			if matches[2] == 'leave' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked leave ")
 				return lock_group_leave(msg, data, target)
 			end
-			if matches[2] == 'join' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked join ")
-				return lock_group_join(msg, data, target)
+			if matches[2] == 'number' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked number ")
+				return lock_group_number(msg, data, target)
+			end
+			if matches[2] == 'english' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked english ")
+				return lock_group_english(msg, data, target)
 			end
 			if matches[2] == 'tags' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked tags posting ")
@@ -2046,17 +2264,53 @@ local function run(msg, matches)
 
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
+			if matches[2] == 'all' then
+		local dsafemode ={
+			unlock_group_tags(msg, data, target),
+		unlock_group_spam(msg, data, target),
+		unlock_group_links(msg, data, target),
+		unlock_group_flood(msg, data, target),
+		unlock_group_arabic(msg, data, target),
+		unlock_group_membermod(msg, data, target),
+		unlock_group_rtl(msg, data, target),
+		unlock_group_tgservice(msg, data, target),
+		unlock_group_sticker(msg, data, target),
+		unlock_group_contacts(msg, data, target),
+		unlock_group_reply(msg, data, target),
+		unlock_group_fwd(msg, data, target),
+		unlock_group_english(msg, data, target),
+		unlock_group_emoji(msg, data, target),
+		unlock_group_username(msg, data, target),
+		unlock_group_media(msg, data, target),
+		unlock_group_leave(msg, data, target),
+		unlock_group_bots(msg, data, target),
+		unlock_group_number(msg, data, target),
+				}
+				return unlock_group_all(msg, data, target), dsafemode
+			end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
+			end
+			if matches[2] == 'reply' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked reply posting")
+				return unlock_group_reply(msg, data, target)
+			end
+			if matches[2] == 'fwd' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked fwd posting")
+				return unlock_group_fwd(msg, data, target)
 			end
 			if matches[2] == 'leave' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked leave")
 				return unlock_group_leave(msg, data, target)
 			end
-			if matches[2] == 'join' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked join")
-				return unlock_group_join(msg, data, target)
+			if matches[2] == 'number' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked number")
+				return unlock_group_number(msg, data, target)
+			end
+			if matches[2] == 'english' then
+				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked english")
+				return unlock_group_english(msg, data, target)
 			end
 			if matches[2] == 'tags' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked tags posting ")
